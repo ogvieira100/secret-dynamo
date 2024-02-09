@@ -56,8 +56,8 @@ else if (processo == "WORKER-SERPRO-ENVIO-DESCONTO")
     //configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.RubricaAverbacaoSiape.CodMfacil = 34921;
     //configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.FuncionarioNaoTemMargemParaEssaSolicitacao = 8058;
 
-    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.QuantidadeRegistrosCarregadosRetornoRemessaMargemBD = 100;
-    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.QuantidadeRegistrosRequestRetornoRemessa = 100;
+    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.QuantidadeRegistrosCarregadosRetornoRemessaMargemBD = 0;
+    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.QuantidadeRegistrosRequestRetornoRemessa = 10;
     configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.QuantidadeRequestsParalelosRetornoRemessa = 1;
 
 
