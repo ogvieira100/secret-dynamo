@@ -3,30 +3,54 @@ using ConsoleSecret;
 
 Console.WriteLine("Hello, World!");
 
-
-var secretWorkerPrevia =  await SecretsManager.GetSecretValueAsync("SECRETS-WORKER-PREVIA");
-
-var secretWorkerRemessaOrgao = await SecretsManager.GetSecretValueAsync("SECRETS-WORKER-REMESSA-ORGAO");
-
-//
-//CONNSTR-AUTORIZADORSITECONTEXT-CREDCESTA
-var secretAutorizadorSiteCredCesta = await SecretsManager.GetSecretValueAsync("CONNSTR-AUTORIZADORSITECONTEXT-CREDCESTA");
-
-//
-
-//
-var secretWISECONS = await SecretsManager.GetSecretValueAsync("CONNSTR-WISECONS-CREDCESTA");
-//CONNSTR-WISECONS-CREDCESTA
-var secretPlataformaConsignadoBackofficeDescontoFolha = await SecretsManager.GetSecretValueAsync("PLATAFORMA-CONSIGNADO-BACKOFFICE-DESCONTO-FOLHA");
-
-//
+string[] processo_executar = { "SECRETS-WORKER-PREVIA" };
 
 
-//var novasecretWISECONS = "{\"conFuncao\":\"Server=MAWS-FDB-D01.bancomaxima.com.br;Database=MAXCDCEMPR;Uid=plataforma_credcesta;Pwd=pl4t4f0rmaCRED;MultiSubnetFailover=True;\",\"conOperacoes\":\"Server=maws-rdb-d05.bancomaxima.com.br;Database=operacoes;Uid=SVC-DEV-Mtoraverb;Pwd=Dc8Re3LTrMwNuWXDZkgM1;MultiSubnetFailover=True;\",\"conCredCesta\":\"Server=maws-rdb-d01.bancomaxima.com.br;Database=MAX_AUTORIZADOR_CREDCESTA;Uid=plataformacredcesta;Pwd=plat$cred2020;\"}";
+Console.WriteLine("Informe o processo");
+var processo = Console.ReadLine();
+while (!processo_executar.Contains(processo))
+{
+    Console.WriteLine("Informe o processo");
+    processo = Console.ReadLine();
+}
+if (processo == "SECRETS-WORKER-PREVIA")
+{
 
-//await SecretsManager.UpdateSecret("SECRETS-WORKER-PREVIA", novasecretWISECONS);
+    var secretWorkerPrevia = await SecretsManager.GetSecretValueAsync("SECRETS-WORKER-PREVIA");
 
-//
+}
+else if (processo == "SECRETS-WORKER-REMESSA-ORGAO")
+{
+
+    var secretWorkerRemessaOrgao = await SecretsManager.GetSecretValueAsync("SECRETS-WORKER-REMESSA-ORGAO");
+
+
+}
+else if (processo == "CONNSTR-AUTORIZADORSITECONTEXT-CREDCESTA")
+{
+
+    //
+    //CONNSTR-AUTORIZADORSITECONTEXT-CREDCESTA
+    var secretAutorizadorSiteCredCesta = await SecretsManager.GetSecretValueAsync("CONNSTR-AUTORIZADORSITECONTEXT-CREDCESTA");
+
+
+}
+else if (processo == "CONNSTR-WISECONS-CREDCESTA")
+{
+
+    //
+
+    //
+    var secretWISECONS = await SecretsManager.GetSecretValueAsync("CONNSTR-WISECONS-CREDCESTA");
+    //CONNSTR-WISECONS-CREDCESTA
+    var secretPlataformaConsignadoBackofficeDescontoFolha = await SecretsManager.GetSecretValueAsync("PLATAFORMA-CONSIGNADO-BACKOFFICE-DESCONTO-FOLHA");
+
+    //
+
+
+
+}
+
 
 
 Console.ReadLine(); 
