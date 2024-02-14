@@ -54,5 +54,13 @@ namespace ConsoleDynamo
         public CodigoConvenioSerpro RubricaAverbacaoSiape { get; set; }
 
         //
+        [DynamoDBProperty("QuantidadeRegistrosCarregadosRessarcimentoBD")]
+        public int QuantidadeRegistrosCarregadosRessarcimentoBD { get; set; }
+
+        [DynamoDBProperty("QuantidadeRegistrosRessarcimentoRequest")]
+        public int QuantidadeRegistrosRessarcimentoRequest { get; set; }
+
+        [DynamoDBProperty("QuantidadeRequestsRessarcimentoParalelos")]
+        public int QuantidadeRequestsRessarcimentoParalelos { get; set; }
     }
 }

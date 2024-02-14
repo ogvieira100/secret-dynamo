@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 var dynamoBaseRepository = new DynamoBaseRepository<ConfiguracaoSistema>();
 
 Console.WriteLine("Hello, World!");
-string[] processo_executar = { "L" , "WORKER-GERACAO-REMESSA-DESCONTOEMFOLHA" , "WORKER-SERPRO-ENVIO-DESCONTO" };
+string[] processo_executar = { "L" , "PLATAFORMA-CONSIGNADO-BACKOFFICE-DESCONTO-FOLHA", "WORKER-GERACAO-REMESSA-DESCONTOEMFOLHA" , "WORKER-SERPRO-ENVIO-DESCONTO" };
 
 
 Console.WriteLine("Informe o processo");
@@ -62,6 +62,27 @@ else if (processo == "WORKER-SERPRO-ENVIO-DESCONTO")
 
 
     await dynamoBaseRepository.SalvarAsync(configWorkerSerproEnvioDesconto);
+}
+else if (processo == "PLATAFORMA-CONSIGNADO-BACKOFFICE-DESCONTO-FOLHA")
+{
+
+    var configWorkerSerproEnvioDesconto = await dynamoBaseRepository.BuscarAsync("PLATAFORMA-CONSIGNADO-BACKOFFICE-DESCONTO-FOLHA");
+    string jsonStringss = JsonConvert.SerializeObject(configWorkerSerproEnvioDesconto);
+    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.QuantidadeRegistrosCarregadosRessarcimentoBD = 3;
+    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.QuantidadeRegistrosRessarcimentoRequest = 2;
+
+/*
+  [DynamoDBProperty("QuantidadeRegistrosCarregadosRessarcimentoBD")]
+    public int QuantidadeRegistrosCarregadosRessarcimentoBD { get; set; }
+
+    [DynamoDBProperty("QuantidadeRegistrosRessarcimentoRequest")]
+    public int QuantidadeRegistrosRessarcimentoRequest { get; set; }
+
+    [DynamoDBProperty("QuantidadeRequestsRessarcimentoParalelos")]
+    public int QuantidadeRequestsRessarcimentoParalelos { get; set; }
+ */
+
+await dynamoBaseRepository.SalvarAsync(configWorkerSerproEnvioDesconto);
 }
 
 
