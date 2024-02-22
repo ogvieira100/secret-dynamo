@@ -7,8 +7,22 @@ using System.Threading.Tasks;
 
 namespace ConsoleDynamo
 {
+
+
+    public class TitularRessarcimento
+    {
+        public string Nome { get; set; }
+        public string CGCCPF { get; set; }
+        public string ContaRessarcimento { get; set; }
+        public string AgenciaRessarcimento { get; set; }
+    }
     public class ConfiguracaoNegocio
     {
+
+
+        [DynamoDBProperty("TitularRessarcimento")]
+        public TitularRessarcimento TitularRessarcimento { get; set; }
+
         [DynamoDBProperty("QuantidadeRegistrosCarregadosBD")]
         public int QuantidadeRegistrosCarregadosBD { get; set; }
 
@@ -62,5 +76,7 @@ namespace ConsoleDynamo
 
         [DynamoDBProperty("QuantidadeRequestsRessarcimentoParalelos")]
         public int QuantidadeRequestsRessarcimentoParalelos { get; set; }
+
+
     }
 }

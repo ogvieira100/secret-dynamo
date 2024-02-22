@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 var dynamoBaseRepository = new DynamoBaseRepository<ConfiguracaoSistema>();
 
 Console.WriteLine("Hello, World!");
-string[] processo_executar = { "L" , "PLATAFORMA-CONSIGNADO-BACKOFFICE-DESCONTO-FOLHA", "WORKER-GERACAO-REMESSA-DESCONTOEMFOLHA" , "WORKER-SERPRO-ENVIO-DESCONTO" };
+string[] processo_executar = { "L" , "PLATAFORMA-RELATORIO-API", "PLATAFORMA-CONSIGNADO-BACKOFFICE-DESCONTO-FOLHA", "WORKER-GERACAO-REMESSA-DESCONTOEMFOLHA" , "WORKER-SERPRO-ENVIO-DESCONTO" };
 
 
 Console.WriteLine("Informe o processo");
@@ -32,6 +32,11 @@ if (processo == "L")
     Console.WriteLine(jsonString);
     Console.ReadLine();
 
+}
+else if (processo == "PLATAFORMA-RELATORIO-API")
+{
+    var configWorkerSerpro = await dynamoBaseRepository.BuscarAsync("PLATAFORMA-RELATORIO-API"); ;
+    string jsonStrings = JsonConvert.SerializeObject(configWorkerSerpro);
 }
 else if (processo == "WORKER-GERACAO-REMESSA-DESCONTOEMFOLHA")
 {
@@ -68,21 +73,26 @@ else if (processo == "PLATAFORMA-CONSIGNADO-BACKOFFICE-DESCONTO-FOLHA")
 
     var configWorkerSerproEnvioDesconto = await dynamoBaseRepository.BuscarAsync("PLATAFORMA-CONSIGNADO-BACKOFFICE-DESCONTO-FOLHA");
     string jsonStringss = JsonConvert.SerializeObject(configWorkerSerproEnvioDesconto);
-    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.QuantidadeRegistrosCarregadosRessarcimentoBD = 3;
-    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.QuantidadeRegistrosRessarcimentoRequest = 2;
+    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.TitularRessarcimento = new TitularRessarcimento();
+    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.TitularRessarcimento.Nome = "Zebetio";
+    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.TitularRessarcimento.ContaRessarcimento = "1015161";
+    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.TitularRessarcimento.AgenciaRessarcimento = "1015161";
+    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.TitularRessarcimento.CGCCPF = "21371885996";
+    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.QuantidadeRegistrosCarregadosRessarcimentoBD = 100;
+    configWorkerSerproEnvioDesconto.ConfiguracaoNegocio.QuantidadeRegistrosRessarcimentoRequest = 50;
 
-/*
-  [DynamoDBProperty("QuantidadeRegistrosCarregadosRessarcimentoBD")]
-    public int QuantidadeRegistrosCarregadosRessarcimentoBD { get; set; }
+    /*
+      [DynamoDBProperty("QuantidadeRegistrosCarregadosRessarcimentoBD")]
+        public int QuantidadeRegistrosCarregadosRessarcimentoBD { get; set; }
 
-    [DynamoDBProperty("QuantidadeRegistrosRessarcimentoRequest")]
-    public int QuantidadeRegistrosRessarcimentoRequest { get; set; }
+        [DynamoDBProperty("QuantidadeRegistrosRessarcimentoRequest")]
+        public int QuantidadeRegistrosRessarcimentoRequest { get; set; }
 
-    [DynamoDBProperty("QuantidadeRequestsRessarcimentoParalelos")]
-    public int QuantidadeRequestsRessarcimentoParalelos { get; set; }
- */
+        [DynamoDBProperty("QuantidadeRequestsRessarcimentoParalelos")]
+        public int QuantidadeRequestsRessarcimentoParalelos { get; set; }
+     */
 
-await dynamoBaseRepository.SalvarAsync(configWorkerSerproEnvioDesconto);
+    await dynamoBaseRepository.SalvarAsync(configWorkerSerproEnvioDesconto);
 }
 
 
