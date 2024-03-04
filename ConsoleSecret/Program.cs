@@ -3,7 +3,7 @@ using ConsoleSecret;
 
 Console.WriteLine("Hello, World!");
 
-string[] processo_executar = { "SECRETS-WORKER-PREVIA", "PLATAFORMA-RELATORIO-API" };
+string[] processo_executar = { "SECRETS-WORKER-RESSARCIMENTO", "SECRETS-WORKER-PREVIA", "PLATAFORMA-CONSIGNADO-BACKOFFICE-DESCONTO-FOLHA", "PLATAFORMA-RELATORIO-API" };
 
 
 Console.WriteLine("Informe o processo");
@@ -17,6 +17,12 @@ if (processo == "SECRETS-WORKER-PREVIA")
 {
 
     var secretWorkerPrevia = await SecretsManager.GetSecretValueAsync("SECRETS-WORKER-PREVIA");
+
+}
+else if (processo == "SECRETS-WORKER-RESSARCIMENTO")
+{
+    var secretPlataformaConsignadoBackofficeDescontoFolha = await SecretsManager.GetSecretValueAsync("SECRETS-WORKER-RESSARCIMENTO");
+    //await SecretsManager.InsertSecret("SECRETS-WORKER-RESSARCIMENTO", secretPlataformaConsignadoBackofficeDescontoFolha, "Secret WorkerRessarcimento ");
 
 }
 else if (processo == "PLATAFORMA-RELATORIO-API")
@@ -80,7 +86,7 @@ else if (processo == "CONNSTR-AUTORIZADORSITECONTEXT-CREDCESTA")
 
 
 }
-else if (processo == "CONNSTR-WISECONS-CREDCESTA")
+else if (processo == "PLATAFORMA-CONSIGNADO-BACKOFFICE-DESCONTO-FOLHA")
 {
 
     //
